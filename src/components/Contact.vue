@@ -10,6 +10,19 @@
         <button @click="toggleFavorite" :class="[isFavorite ? 'btn btn-warning' : 'btn btn-success']">
           {{ isFavorite ? "Remove from" : "Add to" }} Favorite
         </button>
+
+        <!-- Using inLine Emit -->
+        <!-- <button
+          @click="
+            emit('update-favorite', {
+              name: props.name,
+              isFavorite: props.isFavorite,
+            })
+          "
+          :class="[isFavorite ? 'btn btn-warning' : 'btn btn-success']"
+        >
+          {{ isFavorite ? "Remove from" : "Add to" }} Favorite
+        </button> -->
       </div>
     </div>
     <span class="float-end small" v-if="ownerName != ''">
@@ -33,7 +46,15 @@ const props = defineProps({
 
 const emit = defineEmits(["update-favorite"]); //to trigger from child to parent
 
+// function toggleFavorite() {
+//   emit("update-favorite", [props.isFavorite, props.name]); //using array
+// }
+
+//using Object
 function toggleFavorite() {
-  emit("update-favorite");
+  emit("update-favorite", {
+    name: props.name,
+    isFavorite: props.isFavorite,
+  });
 }
 </script>
