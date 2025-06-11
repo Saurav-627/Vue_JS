@@ -1,13 +1,16 @@
 <template>
   <div class="bg-info rounded p-1 pb-4 m-2">
     <div class="row">
-      <div class="col-6">
+      <div class="col-5">
         <h1>Name : {{ name }}</h1>
         <p>Email : {{ email }}</p>
         <p>Phone : {{ phone }}</p>
       </div>
       <div class="col-3">
-        <button @click="toggleFavorite" :class="[isFavorite ? 'btn btn-warning' : 'btn btn-success']">
+        <button
+          @click="toggleFavorite"
+          :class="[isFavorite ? 'btn btn-warning form-control' : 'btn btn-success form-control']"
+        >
           {{ isFavorite ? "Remove from" : "Add to" }} Favorite
         </button>
 
@@ -24,6 +27,11 @@
           {{ isFavorite ? "Remove from" : "Add to" }} Favorite
         </button> -->
       </div>
+
+      <div class="col-4">
+        <!-- maxLuckyNumber coming from app -->
+        <LuckyNumber :max-number="maxLuckyNumber"></LuckyNumber> 
+      </div>
     </div>
     <span class="float-end small" v-if="ownerName != ''">
       "this contact info belongs to {{ ownerName }}"
@@ -32,9 +40,12 @@
 </template>
 
 <script setup>
+import LuckyNumber from './LuckyNumber.vue';
+
 // const email = ref("hsaurav@gmail"); //if email is passed from app then this will work not props email
 
 // const props = defineProps(["name","phone","ownerName"]); //Not Validated
+
 
 const props = defineProps({
   name: { type: String, required: true }, //validating props
@@ -42,6 +53,7 @@ const props = defineProps({
   email: { type: String, required: true }, //validating props
   ownerName: String, //validating props
   isFavorite: Boolean,
+  maxLuckyNumber: Number,
 });
 
 const emit = defineEmits(["update-favorite"]); //to trigger from child to parent

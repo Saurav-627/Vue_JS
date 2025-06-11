@@ -1,9 +1,15 @@
 <template>
-  <div class="bg-dark text pt-3">
+  <div class="bg-dark text pt-3" :style="{ height: '100vh' }">
     <div class="container">
-      <div class="text-white float-end">
-        Contact owner name: <input type="text" v-model="ownerName" />
+      <div class="row text-white p-2 mb-2">
+        <div class="col-6">
+          Owner name : <input type="text" v-model="ownerName" />
+        </div>
+        <div class="col-6 text-end">
+          Max Lucky Number : <input type="number" v-model="maxNumber" />
+        </div>
       </div>
+
       <br /><br />
       <AddContact @add-contact="onAddContact($event)"></AddContact>
       <div class="row">
@@ -14,13 +20,13 @@
             :email="contact.email"
             :ownerName="contact.ownerName"
             :isFavorite="contact.isFavorite"
+            :maxLuckyNumber="maxNumber"
             @update-favorite="
               contact.isFavorite = onUpdateFavorite($event, contact.phone)
             "
           ></Contact>
         </div>
       </div>
-      <LuckyNumber :max-number="10"></LuckyNumber>
     </div>
   </div>
 </template>
@@ -29,9 +35,9 @@
 import { reactive, ref } from "vue";
 import Contact from "./components/Contact.vue";
 import AddContact from "./components/AddContact.vue";
-import LuckyNumber from "./components/LuckyNumber.vue";
 
 const ownerName = ref("masteryVue");
+const maxNumber = ref(100);
 
 const contacts = reactive([
   {
@@ -57,11 +63,11 @@ const contacts = reactive([
   },
 ]);
 
-function onAddContact (contact) {
+function onAddContact(contact) {
   contact.ownerName = ownerName.value;
   contact.isFavorite = false;
   console.log(contact);
-  
+
   contacts.push(contact);
 }
 
