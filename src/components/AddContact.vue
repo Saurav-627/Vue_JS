@@ -45,19 +45,32 @@
 <script setup>
 import { reactive } from "vue";
 
+// const emit = defineEmits(["add-contact"]);
+
+const props = defineProps({
+  onAddContact: Function,
+});
 const contact = reactive({
   name: "",
   phone: "",
   email: "",
 });
 
-const emit = defineEmits(["add-contact"]);
+// function addContact() {
+//   console.log(contact);
+//   const contactData = {
+//       ...contact
+//   }
+//   emit("add-contact", contactData);
+//   contact.name = "";
+//   contact.phone = "";
+//   contact.email = "";
+// }
 function addContact() {
-  console.log(contact);
   const contactData = {
-      ...contact
+    ...contact,
   }
-  emit("add-contact", contactData);
+  props.onAddContact(contactData);
   contact.name = "";
   contact.phone = "";
   contact.email = "";

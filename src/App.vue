@@ -11,7 +11,11 @@
       </div>
 
       <br /><br />
-      <AddContact @add-contact="onAddContact($event)"></AddContact>
+      <!-- <AddContact @add-contact="onAddContact($event)"></AddContact> -->
+
+      <!-- passing method as a props: -->
+
+      <AddContact :onAddContact="onAddContact"></AddContact>
       <div class="row">
         <div class="col-12" v-for="contact in contacts" :key="contact.name">
           <!-- <Contact
