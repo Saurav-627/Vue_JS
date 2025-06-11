@@ -30,7 +30,8 @@
 
       <div class="col-4">
         <!-- maxLuckyNumber coming from app -->
-        <LuckyNumber :max-number="maxLuckyNumber"></LuckyNumber> 
+        <!-- <LuckyNumber :maxNumber="maxLuckyNumber"></LuckyNumber>  -->
+         <LuckyNumber></LuckyNumber>
       </div>
     </div>
     <span class="float-end small" v-if="ownerName != ''">
@@ -53,7 +54,7 @@ const props = defineProps({
   email: { type: String, required: true }, //validating props
   ownerName: String, //validating props
   isFavorite: Boolean,
-  maxLuckyNumber: Number,
+  // maxLuckyNumber: Number,
 });
 
 const emit = defineEmits(["update-favorite"]); //to trigger from child to parent
