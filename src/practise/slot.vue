@@ -1,3 +1,36 @@
+<!-- With the use of slot we can pass data from parent to child components. -->
+
+<!-- PASSING FROM PARENT COMPONENT  -->
+<template>
+  <LuckyNumberParentComponent>
+    <p class="pt-2">We have two version for picking lucky number.</p>
+    <template v-slot:moreInfo>
+      <p>Click the button to to toggle between the two version</p>
+    </template>
+    <template v-slot:learnSlot>
+      <button @click="showMessage">What will we learn?</button>
+      <h4 class="text-success">{{ message }}</h4>
+    </template>
+    <hr />
+  </LuckyNumberParentComponent>
+</template>
+<script setup>
+import { ref } from "vue";
+import LuckyNumberParentComponent from "./components/LuckyNumberParentComponent.vue";
+const message = ref("");
+const showMessage = () => {
+  message.value = "We will learn how to use slot";
+};
+</script>
+
+<!-- Without using slot the p tag content from up will not render in child component but
+  if we use slot the p tag content will render in child component. -->
+
+<!-- The slot data always belongs to parent component -->
+
+<!-- We can give name to the slot by using template and inside template v-slot:name which is used above -->
+
+<!-- USING SLOT  -->
 <template>
   <div class="bg-dark text pt-3" :style="{ height: '100vh' }">
     <h1 class="text-center text-success">Learn Slot</h1>
@@ -6,18 +39,18 @@
       <slot name="learnSlot"></slot>
       <slot name="moreInfo"></slot>
       <button
-        class="btn btn-primary text-white m-2"
+        class="btn btn-primary text-black m-2"
         @click="newVersion = !newVersion"
       >
         Toggle Component</button
       ><br />
       <button
-        class="btn btn-primary text-white m-2"
+        class="btn btn-primary text-black m-2"
         @click="newVersion = false"
       >
         Lucky Number V1
       </button>
-      <button class="btn btn-primary text-white m-2" @click="newVersion = true">
+      <button class="btn btn-primary text-black m-2" @click="newVersion = true">
         Lucky Number V2
       </button>
 
